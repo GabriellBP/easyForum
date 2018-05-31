@@ -1,0 +1,43 @@
+page-login {
+  #login {
+    background: #ff8714 url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTjIkD2d8J_y4Jz8AQ3SvK5n16HK7hXUzY7oZy7Kr5i3LYSUd7A") no-repeat center center;
+    //background-image: url("../../assets/imgs/login_bg.jpg") !important;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+
+    .scroll-content {
+      display: table !important;
+      width: 100% !important;
+      height: 100% !important;
+
+      form {
+        display: table-cell;
+        vertical-align: middle;
+
+        .header {
+          padding-bottom: 20px;
+
+          img {
+            display: block;
+            width: 90%;
+            margin: 0 auto;
+          }
+        }
+
+        ion-list {
+          width: 100%;
+          padding: 0px;
+          margin: 0px;
+          margin-bottom: 20px;
+        }
+
+        .button.button-light.active, .button.button-light.activated {
+          color: #fff;
+          opacity: inherit;
+        }
+      }
+    }
+  }
+}

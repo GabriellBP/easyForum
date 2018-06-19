@@ -15,6 +15,7 @@
 // for the .md, .ios, or .wp mode classes. The mode class is
 // automatically applied to the <body> element in the app.
 
-//ion-content {
-//  background-image: url('../img/login_bg.jpg');
-//}
+ion-content {
+  background: #ff8714 url("../../assets/imgs/login_bg.jpg") no-repeat center center;
+  background-size: cover;
+}

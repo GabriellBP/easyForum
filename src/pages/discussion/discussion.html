@@ -1,0 +1,39 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>{{discussion}}</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+  <ion-scroll scrollY="true" text-wrap text-justify class="textFormat">
+    {{description}}
+  </ion-scroll>
+  <div *ngFor="let a of answers; index as idx">
+    <ion-card>
+      <ion-card-header>
+        {{a.author}}
+      </ion-card-header>
+      <ion-card-content>
+        {{a.answer}}
+        <!--<button ion-button clear item-end icon-end *ngIf="showButtonAnswers[idx]" (click)="show(idx)">-->
+          <!--{{buttonAnswers[idx].text}}-->
+          <!--<ion-icon name="{{buttonAnswers[idx].icon}}"></ion-icon>-->
+        <!--</button>-->
+        <button>Answer</button>
+      </ion-card-content>
+    </ion-card>
+    <ion-card *ngFor="let ans of a.answers; index as idxa" class="answers">
+      <!--<ion-card-header *ngIf="showAnswers || idxa == (a.answers.length-1)">-->
+      <ion-card-header>
+        {{ans.author}}
+      </ion-card-header>
+      <!--<ion-card-content *ngIf="showAnswers || idxa == (a.answers.length-1)">-->
+      <ion-card-content>
+        {{ans.answer}}
+      </ion-card-content>
+    </ion-card>
+  </div>
+</ion-content>

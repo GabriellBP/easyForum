@@ -1,17 +1,40 @@
 <ion-header>
   <ion-navbar>
     <ion-title>
-      Contact
+      Ionic Blank
     </ion-title>
   </ion-navbar>
 </ion-header>
 
 <ion-content>
+
   <ion-list>
-    <ion-list-header>Follow us on Twitter</ion-list-header>
-    <ion-item>
-      <ion-icon name="ionic" item-start></ion-icon>
-      @ionicframework
-    </ion-item>
+    <button detail-none (click)="expandItem(item)" ion-item *ngFor="let item of items">
+      <ion-thumbnail item-start>
+        <img src="http://placehold.it/100">
+      </ion-thumbnail>
+      <h2>My Neighbor Totoro</h2>
+      <p>Hayao Miyazaki • 1988</p>
+      <expandable [expandHeight]="itemExpandHeight" [expanded]="item.expanded">
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla mattis justo nec neque ornare, sit amet viverra sapien sodales. Maecenas ligula arcu, blandit egestas libero vitae, auctor blandit augue. Donec ac nibh ut nisi lobortis fermentum ut et turpis. Donec ante metus, tincidunt ac aliquam sed, tincidunt id eros. Quisque rhoncus id velit gravida tristique. In congue scelerisque egestas. Integer in malesuada ligula, id volutpat diam. Fusce dignissim ex vitae ligula sagittis sollicitudin. Duis mollis a orci et viverra. Aenean quis justo quis metus pellentesque tempor. Integer nec scelerisque urna. Pellentesque euismod eget dui quis elementum. Morbi consequat nunc id auctor sodales. Aliquam sollicitudin eu felis ac tempus. Aenean hendrerit, mauris sit amet blandit auctor, magna nisi eleifend arcu, a pulvinar odio lectus eu sapien. Donec ultrices at leo a lobortis.
+        <br>
+        Suspendisse dignissim porta velit, interdum pharetra dolor volutpat quis. Aenean id dolor arcu. Pellentesque pellentesque facilisis mauris, et porttitor massa fringilla ac. Morbi congue varius diam. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Sed volutpat turpis vitae sem volutpat, sed condimentum est volutpat. Phasellus nec est augue.
+        <br>
+        Suspendisse vitae sodales lectus, eu auctor nisl. Ut vitae dolor eget eros fermentum egestas. Aenean sagittis lectus quis est tincidunt hendrerit. Aliquam orci odio, maximus quis arcu eget, tempus porta enim. Donec volutpat lorem quis leo tincidunt, a venenatis ligula dapibus. In suscipit arcu vitae ultrices ultrices. Curabitur porta velit eget tortor blandit, non tempus metus faucibus. Integer augue orci, pharetra a dignissim vitae, condimentum vel felis. Aliquam nec fringilla ante. Donec et nibh eu arcu rutrum pretium sagittis sed ex. Pellentesque venenatis cursus dui, nec facilisis nibh laoreet sit amet. Integer egestas neque et arcu porta, nec pellentesque nisi aliquet.
+        <br>
+        In at mollis magna. Nam rhoncus dui neque, ac blandit nisl aliquam vitae. Fusce eu nisi mi. Integer faucibus quis tortor et vestibulum. Maecenas quis libero tristique, blandit ipsum efficitur, mattis ipsum. Sed tincidunt magna ante, vel lobortis arcu elementum finibus. Aenean augue eros, fringilla sit amet consectetur efficitur, aliquet sed justo. Sed tempus et sapien sed dictum. Aenean in gravida nisi. Sed eu elit vehicula arcu porta gravida vel sed ipsum. Phasellus hendrerit ultrices posuere. Cras dignissim eleifend enim eget feugiat.
+        <br>
+        Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Nunc finibus nunc lectus, nec vehicula lorem pulvinar nec. Mauris sit amet augue metus. Morbi in quam lacinia, porta dui at, mattis tellus. Phasellus imperdiet, tellus in elementum vehicula, urna tortor auctor dolor, eu congue felis libero eu ante. Sed erat augue, egestas at tincidunt vitae, sodales sit amet lacus. Phasellus vel ultricies leo. Curabitur sollicitudin mattis lorem, ac pharetra odio sollicitudin in. Sed dapibus sapien nulla, sed luctus elit feugiat a. Aliquam rutrum orci sed rutrum ullamcorper. Pellentesque non dui at augue consequat bibendum. Donec et mauris tempus, varius sapien a, euismod neque. Donec in metus quis diam fermentum maximus. Donec laoreet eu erat et tincidunt. Curabitur tincidunt lorem lacus, quis posuere diam luctus quis. Morbi sit amet pretium magna.
+        <br>
+        Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Nunc finibus nunc lectus, nec vehicula lorem pulvinar nec. Mauris sit amet augue metus. Morbi in quam lacinia, porta dui at, mattis tellus. Phasellus imperdiet, tellus in elementum vehicula, urna tortor auctor dolor, eu congue felis libero eu ante. Sed erat augue, egestas at tincidunt vitae, sodales sit amet lacus. Phasellus vel ultricies leo. Curabitur sollicitudin mattis lorem, ac pharetra odio sollicitudin in. Sed dapibus sapien nulla, sed luctus elit feugiat a. Aliquam rutrum orci sed rutrum ullamcorper. Pellentesque non dui at augue consequat bibendum. Donec et mauris tempus, varius sapien a, euismod neque. Donec in metus quis diam fermentum maximus. Donec laoreet eu erat et tincidunt. Curabitur tincidunt lorem lacus, quis posuere diam luctus quis. Morbi sit amet pretium magna.
+        <br>
+        Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Nunc finibus nunc lectus, nec vehicula lorem pulvinar nec. Mauris sit amet augue metus. Morbi in quam lacinia, porta dui at, mattis tellus. Phasellus imperdiet, tellus in elementum vehicula, urna tortor auctor dolor, eu congue felis libero eu ante. Sed erat augue, egestas at tincidunt vitae, sodales sit amet lacus. Phasellus vel ultricies leo. Curabitur sollicitudin mattis lorem, ac pharetra odio sollicitudin in. Sed dapibus sapien nulla, sed luctus elit feugiat a. Aliquam rutrum orci sed rutrum ullamcorper. Pellentesque non dui at augue consequat bibendum. Donec et mauris tempus, varius sapien a, euismod neque. Donec in metus quis diam fermentum maximus. Donec laoreet eu erat et tincidunt. Curabitur tincidunt lorem lacus, quis posuere diam luctus quis. Morbi sit amet pretium magna.
+        <br>
+        Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Nunc finibus nunc lectus, nec vehicula lorem pulvinar nec. Mauris sit amet augue metus. Morbi in quam lacinia, porta dui at, mattis tellus. Phasellus imperdiet, tellus in elementum vehicula, urna tortor auctor dolor, eu congue felis libero eu ante. Sed erat augue, egestas at tincidunt vitae, sodales sit amet lacus. Phasellus vel ultricies leo. Curabitur sollicitudin mattis lorem, ac pharetra odio sollicitudin in. Sed dapibus sapien nulla, sed luctus elit feugiat a. Aliquam rutrum orci sed rutrum ullamcorper. Pellentesque non dui at augue consequat bibendum. Donec et mauris tempus, varius sapien a, euismod neque. Donec in metus quis diam fermentum maximus. Donec laoreet eu erat et tincidunt. Curabitur tincidunt lorem lacus, quis posuere diam luctus quis. Morbi sit amet pretium magna.
+        <br>
+      </expandable>
+      <button ion-button clear item-end><ion-icon [name]="item.icon"></ion-icon></button>
+    </button>
   </ion-list>
+
 </ion-content>

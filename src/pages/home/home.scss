@@ -1,3 +1,39 @@
 page-home {
+  #home {
+    text-transform: capitalize;
 
+    .scroll-content {
+      overflow-y: auto !important;
+    }
+
+    .divExpand {
+      padding-left: 0;
+
+      .label {
+        margin: 0;
+      }
+
+      .item-inner {
+        padding-right: 0 !important;
+      }
+
+      .buttonExpand {
+        padding: 20px 15px 15px 20px;
+
+      }
+
+      .expand {
+        ion-item:hover {
+          cursor: pointer;
+        }
+        button {
+          color: #488aff;
+        }
+      }
+    }
+
+    button {
+      text-transform: capitalize;
+    }
+  }
 }

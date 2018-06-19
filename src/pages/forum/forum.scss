@@ -1,0 +1,36 @@
+page-forum {
+  text-transform: capitalize;
+
+  .scroll-content {
+    overflow-y: auto !important;
+  }
+
+  .divExpand {
+    padding-left: 0;
+
+    .label {
+      margin: 0;
+    }
+
+    .item-inner {
+      padding-right: 0 !important;
+    }
+
+    .buttonExpand {
+      padding: 20px 15px 15px 20px;
+      text-transform: capitalize;
+    }
+
+    .textFormat {
+      height: 100%;
+      font-size: 13px;
+    }
+
+    .buttonDiscussion {
+      margin: 0;
+      height: 100%;
+      width: 30px;
+    }
+  }
+}
+

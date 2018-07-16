@@ -10,12 +10,18 @@ import { TabsPage } from '../pages/tabs/tabs';
 import { LoginPage } from '../pages/login/login';
 import { ForumPage } from '../pages/forum/forum';
 import { DiscussionPage } from '../pages/discussion/discussion';
+import { DiscussionFormPage } from "../pages/forum/discussion-form/discussion-form";
+import { PostFormPage } from "../pages/discussion/post-form/post-form";
 
 import { ExpandableComponent } from '../components/expandable/expandable';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { HttpClientModule } from '@angular/common/http';
+import { AuthProvider } from '../providers/auth/auth';
+import { HttpServiceProvider } from '../providers/http-service/http-service';
+import { IonicStorageModule } from '@ionic/storage';
+
 
 
 
@@ -29,12 +35,15 @@ import { HttpClientModule } from '@angular/common/http';
     LoginPage,
     ForumPage,
     DiscussionPage,
+    DiscussionFormPage,
+    PostFormPage,
     ExpandableComponent
   ],
   imports: [
     BrowserModule,
     IonicModule.forRoot(MyApp),
-    HttpClientModule
+    HttpClientModule,
+    IonicStorageModule.forRoot({name: '__easyforumdb'})
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -46,12 +55,16 @@ import { HttpClientModule } from '@angular/common/http';
     LoginPage,
     ForumPage,
     DiscussionPage,
+    DiscussionFormPage,
+    PostFormPage,
     ExpandableComponent
   ],
   providers: [
     StatusBar,
     SplashScreen,
-    {provide: ErrorHandler, useClass: IonicErrorHandler}
+    {provide: ErrorHandler, useClass: IonicErrorHandler},
+    AuthProvider,
+    HttpServiceProvider
   ]
 })
 export class AppModule {}

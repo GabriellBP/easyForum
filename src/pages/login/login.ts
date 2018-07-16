@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
-
+import {LoadingController, NavController} from 'ionic-angular';
+import { Storage } from '@ionic/storage';
 import { TabsPage } from '../tabs/tabs';
+import {AuthProvider} from "../../providers/auth/auth";
 
 @Component({
   selector: 'page-login',
@@ -9,21 +10,35 @@ import { TabsPage } from '../tabs/tabs';
 })
 export class LoginPage {
   private credential: Object = {
-    username: '',
-    password: ''
+    username: 'jorge',
+    password: 'aA123456789*'
   };
 
   constructor(public navCtrl: NavController,
-              public navParams: NavParams) {
-  }
+              public authProvider: AuthProvider,
+              public loadingCtrl: LoadingController,
+              public storage: Storage) { }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad LoginPage');
+  ionViewWillEnter() {
+    this.authProvider.userIsLogged().then(logged => {
+      if(logged) {
+        this.navCtrl.setRoot(TabsPage);
+      }
+    });
   }
 
   login() {
-    console.log("Login...");
-    this.navCtrl.setRoot(TabsPage);
+    const loader = this.loadingCtrl.create({
+      content: "Please wait...",
+    });
+    loader.present();
+    this.authProvider.login(this.credential).then(data => {
+      loader.dismissAll();
+      if(data) {
+        // setTimeout(() => {this.navCtrl.setRoot(TabsPage);}, 2000);
+        this.navCtrl.setRoot(TabsPage);
+      }
+    });
   }
 
 }

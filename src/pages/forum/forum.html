@@ -1,28 +1,22 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>{{forum.title}}</ion-title>
+    <ion-title>{{forum?.name}}</ion-title>
   </ion-navbar>
 
 </ion-header>
 
-
 <ion-content padding>
   <ion-list>
-    <div ion-item *ngFor="let item of items; index as idx" class="divExpand">
-      <button detail-none ion-item no-lines class="buttonExpand" (click)="expandItem(item)">
-        <h2>{{discussions[idx]}}</h2>
-        <p>Author: Author</p>
-        <ion-icon item-end color="primary" [name]="item.icon"></ion-icon>
+    <div ion-item *ngFor="let disc of forum?.discussions; index as idx" class="divContent">
+      <button detail-none ion-item no-lines class="buttonExpand" (click)="goToDiscussion(disc?.id)">
+        <h2>{{disc?.name}}</h2>
+        <p>Author: {{disc?.userid}}</p>
+        <ion-icon item-end color="primary" name="arrow-dropright"></ion-icon>
       </button>
-      <button detail-none ion-button item-end icon-only color="primary" (click)="goToDiscussion(discussions[idx])"  class="buttonDiscussion">
-        <ion-icon name="arrow-dropright-circle"></ion-icon>
-      </button>
-      <expandable [expandHeight]="itemExpandHeight" [expanded]="item.expanded" class="expand">
-        <ion-scroll scrollY="true" text-wrap text-justify class="textFormat">
-          {{forum.description}}
-        </ion-scroll>
-      </expandable>
     </div>
   </ion-list>
+  <ion-fab bottom right>
+    <button ion-fab (click)="newDiscussion()"><ion-icon name="add"></ion-icon></button>
+  </ion-fab>
 </ion-content>

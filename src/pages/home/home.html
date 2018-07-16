@@ -8,15 +8,15 @@
   <ion-list>
     <div ion-item class="divExpand" *ngFor="let item of items; index as idx">
       <button detail-none ion-item no-lines class="buttonExpand" (click)="expandItem(item)">
-        <h2>{{courses[idx].title}}</h2>
-        <p>Author: {{courses[idx].author}}</p>
+        <h2>{{courses[idx].fullname}}</h2>
+        <p>Short name: {{courses[idx].shortname}}</p>
         <ion-icon item-end clear color="primary" [name]="item.icon"></ion-icon>
       </button>
-      <expandable [expandHeight]="itemExpandHeight" [expanded]="item.expanded" class="expand">
+      <expandable [expandHeight]="item.height" [expanded]="item.expanded" class="expand">
         <ion-list no-lines>
-          <button ion-item detail-none *ngFor="let forum of courses[idx].forums" (click)="goToForum(forum)">
-            <h2>{{forum.title}}</h2>
-            <p>{{forum.subtitle}}</p>
+          <button ion-item detail-none *ngFor="let forum of courses[idx].forum" (click)="goToForum(forum.id, courses[idx].id)">
+            <h2>{{forum.name}}</h2>
+            <p>{{forum.intro}}</p>
           </button>
         </ion-list>
       </expandable>

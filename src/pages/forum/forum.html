@@ -6,12 +6,15 @@
 
 </ion-header>
 
-<ion-content padding>
-  <ion-list>
+<ion-content>
+  <div class="intro" text-justify>
+  {{forum?.intro}}
+  </div>
+  <ion-list margin>
     <div ion-item *ngFor="let disc of forum?.discussions; index as idx" class="divContent">
       <button detail-none ion-item no-lines class="buttonExpand" (click)="goToDiscussion(disc?.id)">
-        <h2>{{disc?.name}}</h2>
-        <p>Author: {{disc?.userid}}</p>
+        <h2 text-capitalize>{{disc?.name}}</h2>
+        <p>Author: {{disc.username?.firstname}}</p>
         <ion-icon item-end color="primary" name="arrow-dropright"></ion-icon>
       </button>
     </div>

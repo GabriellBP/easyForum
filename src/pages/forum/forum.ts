@@ -30,6 +30,10 @@ export class ForumPage {
     this.http.get('forum', this.forumId)
       .subscribe(data => {
         this.forum = data;
+        console.log(this.forum);
+        this.forum.intro = this.forum.intro.replace('<p>', '');
+        this.forum.intro = this.forum.intro.replace('</p>', '');
+        // mystring = mystring.split('/r').join('/')
         loader.dismissAll();
         if(this.forum.discussions.length === 0) {
           const alert = this.alertCtrl.create({

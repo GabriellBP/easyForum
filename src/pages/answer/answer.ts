@@ -1,18 +1,17 @@
-import {Component} from '@angular/core';
+import { Component } from '@angular/core';
 import {LoadingController, ModalController, NavController, NavParams, PopoverController} from 'ionic-angular';
 import {HttpServiceProvider} from "../../providers/http-service/http-service";
-import {PostFormPage} from "./post-form/post-form";
+import {PostFormPage} from "../discussion/post-form/post-form";
 import {PopoverComponent} from "../../components/popover/popover";
-import {AnswerPage} from "../answer/answer";
 
 @Component({
-  selector: 'page-discussion',
-  templateUrl: 'discussion.html',
+  selector: 'page-answer',
+  templateUrl: 'answer.html',
 })
-export class DiscussionPage {
-
-  public discussion: any;
-
+export class AnswerPage {
+  private discussionId: number;
+  public post: any;
+  public answers: any;
 
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
@@ -24,22 +23,27 @@ export class DiscussionPage {
       content: "Please wait...",
     });
     loader.present();
-    let discussionId = this.navParams.get('discussionId');
 
-    this.http.get('discussion', discussionId)
+    this.post = this.navParams.get('post');
+    this.discussionId = this.navParams.get('discussionId');
+
+    this.http.get('answer', this.post.id)
       .subscribe(data => {
-        this.discussion = data;
+        this.answers = data;
         loader.dismissAll();
+        console.log(this.answers);
       }, error => {
         console.log('error', error);
       });
+
+    console.log(this.post);
   }
 
-  presentPopover(ev, post) {
+  presentPopover(ev, answer) {
     let popover = this.popoverCtrl.create(PopoverComponent, {
-      'discussionId': this.discussion.id,
-      'discussionSubject': post.username.firstname,
-      'postParent': post.id,
+      'discussionId': this.discussionId,
+      'discussionSubject': answer.username.firstname,
+      'postParent': answer.id,
     });
     popover.present({
       ev: ev
@@ -48,17 +52,18 @@ export class DiscussionPage {
 
   newPost() {
     const modal = this.modalCtrl.create(PostFormPage, {
-      'discussionId': this.discussion.id,
-      'discussionSubject': this.discussion.name,
-      'postParent': this.discussion.firstpost,
+      'discussionId': this.discussionId,
+      'discussionSubject': this.post.subject,
+      'postParent': this.post.id,
     });
     modal.present();
   }
 
-  getAnswer(post) {
+  getAnswer(answer) {
     this.navCtrl.push(AnswerPage, {
-      'post': post,
-      'discussionId': this.discussion.id
+      'post': answer,
+      'discussionId': this.discussionId
     });
   }
+
 }

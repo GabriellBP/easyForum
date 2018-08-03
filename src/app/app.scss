@@ -19,3 +19,9 @@ ion-content {
   background: #ff8714 url("../../assets/imgs/login_bg.jpg") no-repeat center center;
   background-size: cover;
 }
+
+.line-break{
+  overflow: inherit ;
+  text-overflow: inherit ;
+  white-space: normal;
+}

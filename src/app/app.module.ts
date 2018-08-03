@@ -12,8 +12,10 @@ import { ForumPage } from '../pages/forum/forum';
 import { DiscussionPage } from '../pages/discussion/discussion';
 import { DiscussionFormPage } from "../pages/forum/discussion-form/discussion-form";
 import { PostFormPage } from "../pages/discussion/post-form/post-form";
+import { AnswerPage } from '../pages/answer/answer';
 
 import { ExpandableComponent } from '../components/expandable/expandable';
+import { PopoverComponent } from '../components/popover/popover';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -21,8 +23,6 @@ import { HttpClientModule } from '@angular/common/http';
 import { AuthProvider } from '../providers/auth/auth';
 import { HttpServiceProvider } from '../providers/http-service/http-service';
 import { IonicStorageModule } from '@ionic/storage';
-
-
 
 
 @NgModule({
@@ -37,7 +37,9 @@ import { IonicStorageModule } from '@ionic/storage';
     DiscussionPage,
     DiscussionFormPage,
     PostFormPage,
-    ExpandableComponent
+    AnswerPage,
+    ExpandableComponent,
+    PopoverComponent
   ],
   imports: [
     BrowserModule,
@@ -57,7 +59,9 @@ import { IonicStorageModule } from '@ionic/storage';
     DiscussionPage,
     DiscussionFormPage,
     PostFormPage,
-    ExpandableComponent
+    AnswerPage,
+    ExpandableComponent,
+    PopoverComponent
   ],
   providers: [
     StatusBar,

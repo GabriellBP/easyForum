@@ -10,13 +10,11 @@ import {HttpServiceProvider} from "../../../providers/http-service/http-service"
 export class PostFormPage {
   public discussionId;
   public post = {
-    firstpost: "",
+    postParent: "",
     subject: "",
     userid: "",
     message: ""
   };
-
-  // 'discussionFirstPost': this.discussion.firstpost,
 
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
@@ -26,7 +24,7 @@ export class PostFormPage {
               public http: HttpServiceProvider) {
     this.discussionId = this.navParams.get('discussionId');
     this.post.subject = 'Re: ' + this.navParams.get('discussionSubject');
-    this.post.firstpost = this.navParams.get('discussionFirstPost');
+    this.post.postParent = this.navParams.get('postParent');
     this.auth.getID().then(id => {this.post.userid = id});
   }
 
@@ -52,6 +50,17 @@ export class PostFormPage {
         });
         alert.present();
       }, error => {
+        const alert = this.alertCtrl.create({
+          title: 'Error!',
+          subTitle: 'Some error has occurred!',
+          buttons: [{
+            text: 'OK',
+            handler: () => {
+              this.dismiss();
+            }
+          }]
+        });
+        alert.present();
         console.log('error', error);
       })
     }

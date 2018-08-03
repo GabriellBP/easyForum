@@ -8,20 +8,28 @@
 
 <ion-content padding>
   <div *ngFor="let post of discussion?.posts; index as idx">
-    <ion-card [class.answers]="idx == -1">
+    <ion-card>
       <ion-card-header text-capitalize>
-        <ion-card-title>
+        <ion-card-title class="line-break">
+          <ion-buttons end class="answer-popover" *ngIf="idx != 0">
+            <button end detail-none ion-button icon-only (click)="presentPopover($event, post)">
+              <ion-icon color="dark" name="more"></ion-icon>
+            </button>
+          </ion-buttons>
           {{post.subject}}
           <p>{{post.modified}}, {{post.username?.firstname}}</p>
         </ion-card-title>
       </ion-card-header>
-      <ion-card-content text-justify>
-        {{post.message}}
-        <!--<button ion-button *ngIf="idx == 0">Answer</button>-->
+      <ion-card-content no-padding class="post-message">
+        <button ion-item text-wrap text-justify *ngIf="post.qtt_answers > 0" (click)="getAnswer(post)">
+          {{post.message}}
+          <ion-icon item-end color="primary" name="arrow-dropright"></ion-icon>
+        </button>
+        <p text-justify *ngIf="post.qtt_answers == 0">{{post.message}}</p>
       </ion-card-content>
     </ion-card>
   </div>
   <ion-fab bottom right>
-    <button ion-fab (click)="newAnswer()"><ion-icon name="add"></ion-icon></button>
+    <button ion-fab (click)="newPost()"><ion-icon name="add"></ion-icon></button>
   </ion-fab>
 </ion-content>

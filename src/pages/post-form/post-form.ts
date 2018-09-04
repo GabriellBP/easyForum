@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
-import {AlertController, NavController, NavParams, ViewController} from 'ionic-angular';
-import {AuthProvider} from "../../../providers/auth/auth";
-import {HttpServiceProvider} from "../../../providers/http-service/http-service";
+import {AlertController, Events, NavController, NavParams, ViewController} from 'ionic-angular';
+import {AuthProvider} from "../../providers/auth/auth";
+import {HttpServiceProvider} from "../../providers/http-service/http-service";
 
 @Component({
   selector: 'page-post-form',
@@ -21,7 +21,8 @@ export class PostFormPage {
               public viewCtrl: ViewController,
               public alertCtrl: AlertController,
               private auth: AuthProvider,
-              public http: HttpServiceProvider) {
+              public http: HttpServiceProvider,
+              public event: Events) {
     this.discussionId = this.navParams.get('discussionId');
     this.post.subject = 'Re: ' + this.navParams.get('discussionSubject');
     this.post.postParent = this.navParams.get('postParent');
@@ -49,6 +50,7 @@ export class PostFormPage {
           }]
         });
         alert.present();
+        this.event.publish('postUpdate');
       }, error => {
         const alert = this.alertCtrl.create({
           title: 'Error!',

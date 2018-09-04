@@ -10,8 +10,8 @@ import { TabsPage } from '../pages/tabs/tabs';
 import { LoginPage } from '../pages/login/login';
 import { ForumPage } from '../pages/forum/forum';
 import { DiscussionPage } from '../pages/discussion/discussion';
-import { DiscussionFormPage } from "../pages/forum/discussion-form/discussion-form";
-import { PostFormPage } from "../pages/discussion/post-form/post-form";
+import { DiscussionFormPage } from "../pages/discussion-form/discussion-form";
+import { PostFormPage } from "../pages/post-form/post-form";
 import { AnswerPage } from '../pages/answer/answer';
 
 import { ExpandableComponent } from '../components/expandable/expandable';

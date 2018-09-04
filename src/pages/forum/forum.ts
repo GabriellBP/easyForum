@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
-import {AlertController, LoadingController, ModalController, NavController, NavParams} from 'ionic-angular';
+import {AlertController, Events, LoadingController, ModalController, NavController, NavParams} from 'ionic-angular';
 
 import { DiscussionPage } from '../discussion/discussion';
+import {DiscussionFormPage} from "../discussion-form/discussion-form";
 import {HttpServiceProvider} from "../../providers/http-service/http-service";
-import {DiscussionFormPage} from "./discussion-form/discussion-form";
 
 @Component({
   selector: 'page-forum',
@@ -19,37 +19,49 @@ export class ForumPage {
               public loadingCtrl: LoadingController,
               public alertCtrl: AlertController,
               public modalCtrl: ModalController,
-              public http: HttpServiceProvider) {
-    const loader = this.loadingCtrl.create({
-      content: "Please wait...",
-    });
-    loader.present();
+              public http: HttpServiceProvider,
+              public event: Events) {
     this.forumId = this.navParams.get('forumId');
     this.courseId = this.navParams.get('courseId');
 
-    this.http.get('forum', this.forumId)
-      .subscribe(data => {
-        this.forum = data;
-        this.forum.intro = this.forum.intro.replace('<p>', '');
-        this.forum.intro = this.forum.intro.replace('</p>', '');
-        // mystring = mystring.split('/r').join('/')
-        loader.dismissAll();
-        if(this.forum.discussions.length === 0) {
-          const alert = this.alertCtrl.create({
-            title: 'Discussion!',
-            subTitle: 'No discussions to show!',
-            buttons: [{
-              text: 'OK'
-              // handler: () => {
-              //   this.navCtrl.pop();
-              // }
-            }]
-          });
-          alert.present();
-        }
-      }, error => {
-        console.log('error', error);
-      });
+    this.getForum();
+  }
+
+  ionViewDidLoad() {
+    this.event.subscribe('discussionUpdate', () => {
+      this.getForum();
+    });
+  }
+
+  getForum() {
+    const loader = this.loadingCtrl.create({
+      content: "Please wait...",
+    });
+    loader.present().then(() => {
+      this.http.get('forum', this.forumId)
+        .subscribe(data => {
+          this.forum = data;
+          this.forum.intro = this.forum.intro.replace('<p>', '');
+          this.forum.intro = this.forum.intro.replace('</p>', '');
+          // mystring = mystring.split('/r').join('/')
+          loader.dismissAll();
+          if(this.forum.discussions.length === 0) {
+            const alert = this.alertCtrl.create({
+              title: 'Discussion!',
+              subTitle: 'No discussions to show!',
+              buttons: [{
+                text: 'OK'
+                // handler: () => {
+                //   this.navCtrl.pop();
+                // }
+              }]
+            });
+            alert.present();
+          }
+        }, error => {
+          console.log('error', error);
+        });
+    });
   }
 
   goToDiscussion(discussionId) {

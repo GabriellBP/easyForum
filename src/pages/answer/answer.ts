@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
-import {LoadingController, ModalController, NavController, NavParams, PopoverController} from 'ionic-angular';
+import {Events, LoadingController, ModalController, NavController, NavParams, PopoverController} from 'ionic-angular';
 import {HttpServiceProvider} from "../../providers/http-service/http-service";
-import {PostFormPage} from "../discussion/post-form/post-form";
+import {PostFormPage} from "../post-form/post-form";
 import {PopoverComponent} from "../../components/popover/popover";
 
 @Component({
@@ -18,25 +18,35 @@ export class AnswerPage {
               public loadingCtrl: LoadingController,
               public popoverCtrl: PopoverController,
               public modalCtrl: ModalController,
-              public http: HttpServiceProvider) {
-    const loader = this.loadingCtrl.create({
-      content: "Please wait...",
-    });
-    loader.present();
+              public http: HttpServiceProvider,
+              public event: Events) {
 
     this.post = this.navParams.get('post');
     this.discussionId = this.navParams.get('discussionId');
 
-    this.http.get('answer', this.post.id)
-      .subscribe(data => {
-        this.answers = data;
-        loader.dismissAll();
-        console.log(this.answers);
-      }, error => {
-        console.log('error', error);
-      });
+    this.getAnswers();
+  }
 
-    console.log(this.post);
+  ionViewDidLoad() {
+    this.event.subscribe('postUpdate', () => {
+      this.getAnswers();
+    });
+  }
+
+  getAnswers() {
+    const loader = this.loadingCtrl.create({
+      content: "Please wait...",
+    });
+    loader.present().then(() => {
+      this.http.get('answer', this.post.id)
+        .subscribe(data => {
+          this.answers = data;
+          loader.dismissAll();
+          console.log(this.answers);
+        }, error => {
+          console.log('error', error);
+        });
+    });
   }
 
   presentPopover(ev, answer) {

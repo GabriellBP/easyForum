@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
-import {AlertController, NavController, NavParams, ViewController} from 'ionic-angular';
-import {AuthProvider} from "../../../providers/auth/auth";
-import {HttpServiceProvider} from "../../../providers/http-service/http-service";
+import {AlertController, Events, NavController, NavParams, ViewController} from 'ionic-angular';
+import {AuthProvider} from "../../providers/auth/auth";
+import {HttpServiceProvider} from "../../providers/http-service/http-service";
 
 
 @Component({
@@ -22,7 +22,8 @@ export class DiscussionFormPage {
               public viewCtrl: ViewController,
               public alertCtrl: AlertController,
               private auth: AuthProvider,
-              public http: HttpServiceProvider) {
+              public http: HttpServiceProvider,
+              public event: Events) {
     this.discussion.course = this.navParams.get('courseId');
     this.forumId = this.navParams.get('forumId');
     this.auth.getID().then(id => {this.discussion.userid = id});
@@ -49,9 +50,10 @@ export class DiscussionFormPage {
           }]
         });
         alert.present();
+        this.event.publish('discussionUpdate');
       }, error => {
         console.log('error', error);
-      })
+      });
     }
   }
 

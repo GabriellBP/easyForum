@@ -21,15 +21,16 @@
         </ion-card-title>
       </ion-card-header>
       <ion-card-content no-padding class="post-message">
-        <button ion-item text-wrap text-justify *ngIf="post.qtt_answers > 0" (click)="getAnswer(post)">
+        <button ion-item text-wrap detail-none text-justify *ngIf="post.qtt_answers > 0" (click)="getAnswer(post)">
           {{post.message}}
-          <ion-icon item-end color="primary" name="arrow-dropright"></ion-icon>
+          <ion-icon item-end color="primary" name="md-arrow-dropright"></ion-icon>
         </button>
         <p text-justify *ngIf="post.qtt_answers == 0">{{post.message}}</p>
       </ion-card-content>
+      <!--<button ion-button item-end text-center class="firstCard" *ngIf="idx == 0">Answer</button>-->
     </ion-card>
   </div>
   <ion-fab bottom right>
-    <button ion-fab (click)="newPost()"><ion-icon name="add"></ion-icon></button>
+    <button ion-fab (click)="newPost()"><!--<ion-icon name="add"></ion-icon>-->Answer</button>
   </ion-fab>
 </ion-content>

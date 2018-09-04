@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import {ModalController, NavParams} from "ionic-angular";
-import {PostFormPage} from "../../pages/discussion/post-form/post-form";
+import {PostFormPage} from "../../pages/post-form/post-form";
 
 @Component({
   selector: 'popover',

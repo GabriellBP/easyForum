@@ -1,7 +1,7 @@
 import {Component} from '@angular/core';
-import {LoadingController, ModalController, NavController, NavParams, PopoverController} from 'ionic-angular';
+import {Events, LoadingController, ModalController, NavController, NavParams, PopoverController} from 'ionic-angular';
 import {HttpServiceProvider} from "../../providers/http-service/http-service";
-import {PostFormPage} from "./post-form/post-form";
+import {PostFormPage} from "../post-form/post-form";
 import {PopoverComponent} from "../../components/popover/popover";
 import {AnswerPage} from "../answer/answer";
 
@@ -10,7 +10,7 @@ import {AnswerPage} from "../answer/answer";
   templateUrl: 'discussion.html',
 })
 export class DiscussionPage {
-
+  private discussionId: number;
   public discussion: any;
 
 
@@ -19,20 +19,32 @@ export class DiscussionPage {
               public loadingCtrl: LoadingController,
               public popoverCtrl: PopoverController,
               public modalCtrl: ModalController,
-              public http: HttpServiceProvider) {
+              public http: HttpServiceProvider,
+              public event: Events) {
+    this.discussionId = this.navParams.get('discussionId');
+
+    this.getDiscussion();
+  }
+
+  ionViewDidLoad() {
+    this.event.subscribe('postUpdate', () => {
+      this.getDiscussion();
+    });
+  }
+
+  getDiscussion() {
     const loader = this.loadingCtrl.create({
       content: "Please wait...",
     });
-    loader.present();
-    let discussionId = this.navParams.get('discussionId');
-
-    this.http.get('discussion', discussionId)
-      .subscribe(data => {
-        this.discussion = data;
-        loader.dismissAll();
-      }, error => {
-        console.log('error', error);
-      });
+    loader.present().then(() => {
+      this.http.get('discussion', this.discussionId)
+        .subscribe(data => {
+          this.discussion = data;
+          loader.dismissAll();
+        }, error => {
+          console.log('error', error);
+        });
+    });
   }
 
   presentPopover(ev, post) {

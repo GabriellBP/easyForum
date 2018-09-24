@@ -8,7 +8,8 @@ import {HttpServiceProvider} from "../../providers/http-service/http-service";
   templateUrl: 'post-form.html',
 })
 export class PostFormPage {
-  public discussionId;
+  public discussionId: number;
+  public postParent: any;
   public post = {
     postParent: "",
     subject: "",
@@ -25,7 +26,8 @@ export class PostFormPage {
               public event: Events) {
     this.discussionId = this.navParams.get('discussionId');
     this.post.subject = 'Re: ' + this.navParams.get('discussionSubject');
-    this.post.postParent = this.navParams.get('postParent');
+    this.postParent = this.navParams.get('postParent');
+    this.post.postParent = this.postParent.id;
     this.auth.getID().then(id => {this.post.userid = id});
   }
 

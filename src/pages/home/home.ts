@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { LoadingController, NavController } from 'ionic-angular';
+import { LoadingController, NavController, AlertController } from 'ionic-angular';
 
 import {ForumPage} from "../forum/forum";
 import {AuthProvider} from "../../providers/auth/auth";
@@ -16,10 +16,16 @@ export class HomePage {
 
   constructor(public navCtrl: NavController,
               public loadingCtrl: LoadingController,
+              public alertCtrl: AlertController,
               public http: HttpServiceProvider,
               public authProvider: AuthProvider) {
     const loader = this.loadingCtrl.create({
       content: "Please wait...",
+    });
+    const alertError = this.alertCtrl.create({
+      title: 'Error!',
+      subTitle: 'Something is wrong! Try again later.',
+      buttons: ['OK']
     });
     loader.present();
     this.authProvider.getID().then(idUser => {
@@ -33,10 +39,14 @@ export class HomePage {
           }
           loader.dismissAll();
         }, error => {
+          loader.dismissAll();
+          alertError.present();
           console.log('error', error);
         });
     }).catch(error => {
-      console.log('erro', error);
+      loader.dismissAll();
+      alertError.present();
+      console.log('error', error);
     });
   }
 

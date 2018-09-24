@@ -17,6 +17,8 @@ import { AnswerPage } from '../pages/answer/answer';
 import { ExpandableComponent } from '../components/expandable/expandable';
 import { PopoverComponent } from '../components/popover/popover';
 
+import { HideHeaderDirective } from "../directives/hide-header/hide-header";
+
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { HttpClientModule } from '@angular/common/http';
@@ -39,7 +41,8 @@ import { IonicStorageModule } from '@ionic/storage';
     PostFormPage,
     AnswerPage,
     ExpandableComponent,
-    PopoverComponent
+    PopoverComponent,
+    HideHeaderDirective
   ],
   imports: [
     BrowserModule,

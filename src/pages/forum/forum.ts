@@ -37,6 +37,11 @@ export class ForumPage {
     const loader = this.loadingCtrl.create({
       content: "Please wait...",
     });
+    const alertError = this.alertCtrl.create({
+      title: 'Error!',
+      subTitle: 'Something is wrong! Try again later.',
+      buttons: ['OK']
+    });
     loader.present().then(() => {
       this.http.get('forum', this.forumId)
         .subscribe(data => {
@@ -59,6 +64,8 @@ export class ForumPage {
             alert.present();
           }
         }, error => {
+          loader.dismissAll();
+          alertError.present();
           console.log('error', error);
         });
     });

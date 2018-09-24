@@ -4,4 +4,22 @@ page-post-form {
     width: 100% !important;
     height: 100% !important;
   }
+
+  .post-card {
+    margin: 0 0 0 0;
+    width: 100%;
+  }
+
+  .header-posts {
+    padding: 4px 16px 0 16px;
+  }
+
+  .title-posts {
+    margin: 0;
+    padding: 8px 0 2px 0;
+    p {
+      color: #C5C4BE;
+      font-weight: normal;
+    }
+  }
 }

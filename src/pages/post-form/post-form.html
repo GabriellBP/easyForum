@@ -15,6 +15,18 @@
 </ion-header>
 
 <ion-content>
+  <ion-card class="post-card">
+    <ion-card-header text-capitalize class="header-posts">
+      <ion-card-title class="title-posts">
+        {{postParent?.username.firstname}}
+        <p>{{postParent?.modified}}</p>
+      </ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      {{postParent?.message}}
+    </ion-card-content>
+  </ion-card>
+
   <ion-list padding>
 
     <ion-item>
@@ -25,7 +37,7 @@
   </ion-list>
 
   <div padding>
-    <button ion-button color="primary" (click)="register()" block>Register</button>
+    <button ion-button color="primary" (click)="register()" block>Answer</button>
   </div>
 </ion-content>
 

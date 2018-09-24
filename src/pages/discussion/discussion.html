@@ -1,36 +1,79 @@
-<ion-header>
+<ion-header #head>
 
-  <ion-navbar>
-    <ion-title>{{discussion?.name}}</ion-title>
+  <ion-navbar hideBackButton>
+    <ion-title>
+      {{discussionName}}
+    </ion-title>
   </ion-navbar>
+
+  <ion-toolbar class="header-toolbar">
+    <ion-row>
+      <ion-col col-2>
+          <button ion-button icon-only clear (click)="back()">
+            <ion-icon name="arrow-back"></ion-icon>
+          </button>
+      </ion-col>
+      <ion-col>
+        <button ion-button icon-start clear (click)="newPost(mainPost)">
+          <ion-icon name="ios-undo"></ion-icon>
+          <div>Answer</div>
+        </button>
+      </ion-col>
+      <ion-col>
+        <button ion-button icon-start clear (click)="expandFirstPost(head)">
+          <ion-icon [name]="item.icon"></ion-icon>
+          <div>{{item.text}}</div>
+        </button>
+      </ion-col>
+    </ion-row>
+    <expandable [expandHeight]="item.height" [expanded]="item.expanded" class="expand" >
+      <ion-card class="first-card" #firstCard>
+        <ion-card-header text-capitalize class="header-posts">
+          <ion-card-title class="title-posts">
+            {{mainPost?.username.firstname}}
+            <p>{{mainPost?.modified}}</p>
+          </ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+          {{mainPost?.message}}
+        </ion-card-content>
+      </ion-card>
+    </expandable>
+  </ion-toolbar>
 
 </ion-header>
 
-<ion-content padding>
-  <div *ngFor="let post of discussion?.posts; index as idx">
-    <ion-card>
-      <ion-card-header text-capitalize>
-        <ion-card-title class="line-break">
-          <ion-buttons end class="answer-popover" *ngIf="idx != 0">
-            <button end detail-none ion-button icon-only (click)="presentPopover($event, post)">
-              <ion-icon color="dark" name="more"></ion-icon>
-            </button>
-          </ion-buttons>
-          {{post.subject}}
-          <p>{{post.modified}}, {{post.username?.firstname}}</p>
-        </ion-card-title>
-      </ion-card-header>
-      <ion-card-content no-padding class="post-message">
-        <button ion-item text-wrap detail-none text-justify *ngIf="post.qtt_answers > 0" (click)="getAnswer(post)">
-          {{post.message}}
-          <ion-icon item-end color="primary" name="md-arrow-dropright"></ion-icon>
+<ion-content no-padding hide-header [header]="head">
+  <ion-card *ngFor="let post of discussion?.posts; index as idx" class="card-posts">
+    <ion-card-header text-capitalize class="header-posts">
+      <ion-card-title class="title-posts">
+        <!--<ion-buttons end class="answer-popover" *ngIf="idx != 0">-->
+          <!--<button end detail-none ion-button icon-only (click)="presentPopover($event, post)">-->
+            <!--<ion-icon color="dark" name="more"></ion-icon>-->
+          <!--</button>-->
+        <!--</ion-buttons>-->
+        {{post.username?.firstname}}
+        <p>{{post?.modified}}</p>
+      </ion-card-title>
+    </ion-card-header>
+    <ion-card-content no-padding class="post-message">
+      <button ion-item text-wrap detail-none text-justify *ngIf="post.qtt_answers > 0" (click)="getAnswer(post)">
+        {{post.message}}
+        <ion-icon item-end color="primary" name="md-arrow-dropright"></ion-icon>
+      </button>
+      <p text-justify *ngIf="post.qtt_answers == 0">{{post.message}}</p>
+    </ion-card-content>
+    <ion-row>
+      <ion-col col-4>
+        <button ion-button icon-start clear small (click)="newPost(post)">
+          <ion-icon name="ios-undo"></ion-icon>
+          <div>Answer</div>
         </button>
-        <p text-justify *ngIf="post.qtt_answers == 0">{{post.message}}</p>
-      </ion-card-content>
-      <!--<button ion-button item-end text-center class="firstCard" *ngIf="idx == 0">Answer</button>-->
-    </ion-card>
-  </div>
-  <ion-fab bottom right>
-    <button ion-fab (click)="newPost()"><!--<ion-icon name="add"></ion-icon>-->Answer</button>
-  </ion-fab>
+      </ion-col>
+    </ion-row>
+    <!--<button ion-button item-end text-center class="firstCard" *ngIf="idx == 0">Answer</button>-->
+  </ion-card>
+  <!--<ion-fab bottom right>-->
+    <!--<button ion-fab (click)="newPost()">&lt;!&ndash;<ion-icon name="add"></ion-icon>&ndash;&gt;Answer</button>-->
+  <!--</ion-fab>-->
 </ion-content>
